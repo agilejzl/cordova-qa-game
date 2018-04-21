@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>猜秘密-最新秘密</title>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://qa-api.kdan.cn 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="../css/qas.css">
+  </head>
+  <body>
+    <div class="container container-qa-show">
+      <h3>猜秘密</h3>
+      <form bindsubmit="showGuessResult">
+        <div class="qainfo">
+          <div class="qa-content" v-if="qa.owner">{{qa.show_type === 'unsigned' ? '匿名' : qa.owner.name}}问 {{qa.content}}</div>
+        </div>
+        <div class="qainfo">
+          <div class="qa-content">猜对最多可赢得{{qa.award_price}}分</div>
+        </div>
+
+        <div class="qainfo">
+          <input type="div" class="guess_conent" name="guess_conent" placeholder="你猜测是"/>
+          <div><button v-bind:id="qa.id" type="primary" form-type="submit">花 {{qa.ticket_price}} 分猜一猜</button></div>
+        </div>
+      </form>
+
+      <br/>
+      <div v-if="qa.status === 'exposed'" class="container-answer">
+        <button @click=viewAnswerTap()>查看答案</button>
+        <div v-if="haveJoined">{{qa.answers[0].content}}</div>
+      </div>
+
+      <br/>
+      <div v-if="qa.status === 'exposed'" class="container-answer">
+        <div>猜测记录</div>
+        <div v-for="(guess,index) in qa.guesses">
+          <div class="guess-item">{{guess.user.name}}猜测是: {{guess.content}}</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/Toast.js"></script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/qas/show.js"></script>
+  </body>
+</html>
+
