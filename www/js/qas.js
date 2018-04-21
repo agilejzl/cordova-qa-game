@@ -62,10 +62,12 @@ var app = {
               var items = new Array();
               var items = data.data;
               console.log('qas:', items);
+              window.plugins.toast.showShortTop('成功刷新数据')
               self.$set(self.$data, 'items', items);
             },
             error: function(data, status, xhr) {
               console.error('api error')
+              window.plugins.toast.showLongTop('获取数据失败')
             }
           });
         }

@@ -40,6 +40,7 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+        window.plugins.toast.showShortTop('欢迎~~')
     }
 };
 
