@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>猜秘密-最新秘密</title>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://qa-api.kdan.cn 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="../css/qas.css">
+  </head>
+  <body>
+    <div class="container container-qas">
+      <h3>秘密列表</h3>
+      <div class="qa-list" v-for="(qa,index) in items">
+        <div class="qa-item">
+          <div class="">{{index+1}}.{{statuses[qa.status]}} {{qa.show_type === 'unsigned' ? '匿名' : qa.owner.name}}问 {{qa.content}} {{qa.guesses.length}}人已猜</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/cordova.js"></script>
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/qas.js"></script>
+  </body>
+</html>
+
