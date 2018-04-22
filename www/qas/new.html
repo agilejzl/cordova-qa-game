@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>猜秘密-分享秘密</title>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://qa-api.kdan.cn 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="../css/qas.css">
+  </head>
+  <body>
+    <div class="container container-qa-new">
+      <h3>分享秘密</h3>
+      <form @submit.prevent=submitNewQa()>
+        <div class="section">
+          选择是否公开
+          <div v-for="(item,index) in show_types">
+            <input type="radio" name="show_type" :value="item.value" v-model="show_type">
+            <label :for="item.value">{{item.name}}</label>
+          </div>
+        </div>
+        <div class="section">
+          猜错时你赢得积分数<input name="ticket_price" value="1" type="number" placeholder="入场券(积分数)" />
+        </div>
+        <div class="section">
+          题目内容<input name="content" type="text" placeholder="要猜的题目内容" />
+        </div>
+
+        <br/>
+        <div class="section">
+          设置答案
+          <div v-for="(item,index) in match_patterns">
+            <input type="radio" name="match_pattern" :value="item.value" v-model="match_pattern">
+            <label :for="item.value">{{item.name}}</label>
+          </div>
+        </div>
+
+        <div class="section">
+          猜对时你输的积分数<input name="answer_award_price" value="3" type="number" placeholder="奖励券(积分数)" />
+        </div>
+
+        <div class="section">
+          答案内容<input name="answer_content" type="text" placeholder="要猜的答案内容" />
+        </div>
+
+        <div class="section">
+          有人猜对或超过三天将公布
+        </div>
+        <br/>
+        <input type="submit" value="现在发布">
+      </form>
+    </div>
+
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/Toast.js"></script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/qas/new.js"></script>
+  </body>
+</html>
+
