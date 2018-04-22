@@ -42,6 +42,19 @@ var app = {
         viewAnswerTap: function() {
           this.$set(this.$data, 'haveJoined', !this.haveJoined);
         },
+        showGuessResult: function() {
+          var $form = $(this.$el).find('form');
+          var formData = serializeHash($form);
+          var guess = formData.guess_conent;
+          if (guess.trim() === "") {
+            window.plugins.toast.showLongTop('请输入你的猜测词');
+            return
+          }
+
+          var answers = this.$data.qa.answers;
+          console.log("你猜测是: " + guess, answers);
+          window.plugins.toast.showLongTop('你猜测是: ' + guess);
+        },
         getQa: function() {
           this.$set(this.$data, 'qa', localStorage.getObject('currentQA'));
           // var self = this;

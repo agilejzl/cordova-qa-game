@@ -11,7 +11,7 @@
   <body>
     <div class="container container-qa-show">
       <h3>猜秘密</h3>
-      <form bindsubmit="showGuessResult">
+      <form @submit.prevent=showGuessResult()>
         <div class="qainfo">
           <div class="qa-content" v-if="qa.owner">{{qa.show_type === 'unsigned' ? '匿名' : qa.owner.name}}问 {{qa.content}}</div>
         </div>
@@ -21,7 +21,7 @@
 
         <div class="qainfo">
           <input type="div" class="guess_conent" name="guess_conent" placeholder="你猜测是"/>
-          <div><button v-bind:id="qa.id" type="primary" form-type="submit">花 {{qa.ticket_price}} 分猜一猜</button></div>
+          <div>花 {{qa.ticket_price}} 分<input type="submit" value="猜一猜"></input></div>
         </div>
       </form>
 
