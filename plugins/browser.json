@@ -8,13 +8,17 @@
   },
   "installed_plugins": {
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "com.qagame"
     },
     "cordova-plugin-console": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "com.qagame"
     },
     "cordova-plugin-x-toast": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "com.qagame"
+    },
+    "cordova-plugin-wechat": {
+      "WECHATAPPID": "wx5367b51f05dbb862",
+      "PACKAGE_NAME": "com.qagame"
     }
   },
   "dependent_plugins": {}

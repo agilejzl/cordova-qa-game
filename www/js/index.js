@@ -28,6 +28,32 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        this.checkWxInstalled();
+    },
+
+    checkWxInstalled: function() {
+        Wechat.isInstalled(function (installed) {
+            // alert("Wechat installed: " + (installed ? "Yes" : "No"));
+            window.plugins.toast.showShortTop('已安装微信: ' + installed);
+        }, function (reason) {
+            // alert("Failed: " + reason);
+            window.plugins.toast.showLongTop('请安装微信: ' + reason);
+        });
+    },
+
+    goWxLogin: function() {
+        var scope = "snsapi_userinfo",
+            state = "_" + (+new Date());
+        console.log('跳转微信登录...');
+        window.plugins.toast.showLongTop('跳转微信登录...');
+        Wechat.auth(scope, state, function (response) {
+            // you may use response.code to get the access token.
+            // alert(JSON.stringify(response));
+            window.plugins.toast.showLongTop(JSON.stringify(response));
+        }, function (reason) {
+            // alert("Failed: " + reason);
+            window.plugins.toast.showLongTop('微信登录失败：' + reason);
+        });
     },
 
     // Update DOM on a Received Event
@@ -40,7 +66,7 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-        window.plugins.toast.showShortTop('欢迎~~')
+        // window.plugins.toast.showShortTop('欢迎~~')
     }
 };
 
