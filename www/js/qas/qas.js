@@ -46,9 +46,8 @@ var app = {
         getQaList: function() {
           var self = this;
           $.ajax({
-            url: "http://qa-api.kdan.cn/api/questions",
-            // url: "http://localhost:8090/api/questions",
-            type: 'get',
+            url: API_HOST + 'api/questions',
+            type: 'GET',
             beforeSend:function (request) {
               request.setRequestHeader ('Content-Type', 'application/json');
               request.setRequestHeader ('Accept', 'application/vnd.api+json;version=1');

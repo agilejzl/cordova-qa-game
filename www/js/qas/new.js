@@ -66,7 +66,30 @@ var app = {
             }]
           }
           console.log('qaData: ', data);
-          window.plugins.toast.showLongTop('qaData: ' + JSON.stringify(data));
+          // window.plugins.toast.showLongTop('qaData: ' + JSON.stringify(data));
+
+          $.ajax({
+            url: API_HOST + 'api/questions',
+            type: 'POST',
+            data: JSON.stringify({ data: data }),
+            beforeSend:function (request) {
+              request.setRequestHeader ('Content-Type', 'application/json');
+              request.setRequestHeader ('Accept', 'application/vnd.api+json;version=1');
+              request.setRequestHeader ('Authorization', TEST_TOKEN);
+            },
+            success: function(data, status, xhr) {
+              console.log("createdQa: ", data.data);
+              var qa = data.data;
+              localStorage.setObject('currentQA', qa);
+              document.location.href = 'show.html';
+              window.plugins.toast.showLongTop('发布成功');
+            },
+            error: function(data, status, xhr) {
+              console.error('api error: ', data.responseText)
+              var error = JSON.parse(data.responseText)['errors'][0];
+              window.plugins.toast.showLongTop(error['detail']);
+            }
+          });
         }
       }
     });
