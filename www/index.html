@@ -22,18 +22,21 @@
       <h1>猜秘密</h1>
       <div id="deviceready" class="blink">
         <p class="event listening">加载中...</p>
-        <p onclick="app.goWxLogin()" class="event received">微信登录</p>
+        <!-- <p onclick="app.goWxLogin()" class="event received">微信登录</p> -->
+        <p onclick="app.testerLogin(false)" class="event received">匿名登录</p>
       </div>
       <div class="user-actions">
         <br/>
-        <div><a href="qas/new.html" class="go-qa-add-btn">说个秘密</a></div>
+        <div><a href="#" class="go-qa-add-btn" onclick="if(currentUser() == undefined){ window.plugins.toast.showLongTop('请先登录') } else { document.location.href = 'qas/new.html' }">说个秘密</a></div>
         <div><a href="qas/index.html" class="go-qa-guess-btn"> 去猜秘密</a></div>
         <!-- onclick="window.plugins.toast.showShortTop('去猜秘密', function(e){console.log('toast success: ' + e)}, function(b){alert('toast error: ' + b)})" -->
         <div><a href="#" class="user-ranking" onclick="window.plugins.toast.showLongTop('暂时未开放')""> 得分排行</a></div>
       </div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/Toast.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </body>
 </html>

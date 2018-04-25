@@ -1,4 +1,4 @@
-// window.API_HOST = 'http://localhost:8090/'
+// window.API_HOST = 'http://192.168.0.159:8090/'
 window.API_HOST = 'http://qa-api.kdan.cn/'
 window.TEST_TOKEN = 'test_auth_token'
 
@@ -10,3 +10,15 @@ function serializeHash($form) {
     obj[item.name] = item.value;
     return obj;
   }, {}); }
+
+function currentUser() {
+  return localStorage.getObject('currentUser');
+}
+
+function setCurrentUser(hash_user) {
+  localStorage.setObject('currentUser', hash_user);
+}
+
+function showUserInfo() {
+  $('.event.received').html('欢迎 ' + currentUser().user.name + ' (' + currentUser().user.score + '分)');
+}

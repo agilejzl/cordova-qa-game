@@ -75,7 +75,7 @@ var app = {
             beforeSend:function (request) {
               request.setRequestHeader ('Content-Type', 'application/json');
               request.setRequestHeader ('Accept', 'application/vnd.api+json;version=1');
-              request.setRequestHeader ('Authorization', TEST_TOKEN);
+              request.setRequestHeader ('Authorization', currentUser().auth_token);
             },
             success: function(data, status, xhr) {
               console.log("createdQa: ", data.data);

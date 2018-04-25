@@ -40,8 +40,12 @@ var app = {
       methods: {
         goQaViewTap: function(qa) {
           console.log("QA: ", qa);
-          localStorage.setObject('currentQA', qa);
-          document.location.href = 'show.html';
+          if ($.isEmptyObject(currentUser())) {
+            window.plugins.toast.showLongTop('请先登录');
+          } else {
+            localStorage.setObject('currentQA', qa);
+            document.location.href = 'show.html';
+          }
         },
         getQaList: function() {
           var self = this;
@@ -56,7 +60,7 @@ var app = {
               var items = new Array();
               var items = data.data;
               console.log('qas:', items);
-              window.plugins.toast.showShortTop('成功刷新QAs')
+              // window.plugins.toast.showShortTop('成功刷新QAs')
               self.$set(self.$data, 'items', items);
             },
             error: function(data, status, xhr) {

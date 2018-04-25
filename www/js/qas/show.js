@@ -66,7 +66,7 @@ var app = {
               } },
             beforeSend:function (request) {
               request.setRequestHeader ('Accept', 'application/vnd.api+json;version=1');
-              request.setRequestHeader ('Authorization', TEST_TOKEN);
+              request.setRequestHeader ('Authorization', currentUser().auth_token);
             },
             success: function(data, status, xhr) {
               var data = data.data;

@@ -28,16 +28,41 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
-        this.checkWxInstalled();
+        // this.checkWxInstalled();
+        this.testerLogin(true);
     },
 
     checkWxInstalled: function() {
         Wechat.isInstalled(function (installed) {
             // alert("Wechat installed: " + (installed ? "Yes" : "No"));
-            window.plugins.toast.showShortTop('已安装微信: ' + installed);
+            // window.plugins.toast.showShortTop('已安装微信: ' + installed);
         }, function (reason) {
             // alert("Failed: " + reason);
             window.plugins.toast.showLongTop('请安装微信: ' + reason);
+        });
+    },
+
+    testerLogin: function(silent) {
+        $.ajax({
+            url: API_HOST + 'api/sessions',
+            type: 'POST',
+            data: { data: { js_code: TEST_TOKEN } },
+            beforeSend:function (request) {
+                request.setRequestHeader ('Accept', 'application/vnd.api+json;version=1');
+            },
+            success: function(data, status, xhr) {
+                console.log("signInfo: ", data.data);
+                setCurrentUser(data.data);
+                showUserInfo();
+                if (!silent) {
+                    window.plugins.toast.showLongTop('登录成功');
+                }
+            },
+            error: function(data, status, xhr) {
+                console.error('api error: ', data.responseText)
+                var error = JSON.parse(data.responseText)['errors'][0];
+                window.plugins.toast.showLongTop(error['detail']);
+            }
         });
     },
 
@@ -66,7 +91,12 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-        // window.plugins.toast.showShortTop('欢迎~~')
+        
+        if ($.isEmptyObject(currentUser())) {
+            window.plugins.toast.showShortTop('欢迎~~')
+        } else {
+            showUserInfo();
+        }
     }
 };
 
