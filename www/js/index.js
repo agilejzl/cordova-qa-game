@@ -28,14 +28,12 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
-        // this.checkWxInstalled();
-        this.testerLogin(true);
     },
 
     checkWxInstalled: function() {
         Wechat.isInstalled(function (installed) {
             // alert("Wechat installed: " + (installed ? "Yes" : "No"));
-            // window.plugins.toast.showShortTop('已安装微信: ' + installed);
+            // window.plugins.toast.showLongTop('已安装微信: ' + installed);
         }, function (reason) {
             // alert("Failed: " + reason);
             window.plugins.toast.showLongTop('请安装微信: ' + reason);
@@ -70,6 +68,7 @@ var app = {
         var scope = "snsapi_userinfo",
             state = "_" + (+new Date());
         console.log('跳转微信登录...');
+        
         window.plugins.toast.showLongTop('跳转微信登录...');
         Wechat.auth(scope, state, function (response) {
             // you may use response.code to get the access token.
@@ -91,6 +90,9 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+
+        this.checkWxInstalled();
+        // this.testerLogin(true);
         
         if ($.isEmptyObject(currentUser())) {
             window.plugins.toast.showShortTop('欢迎~~')
